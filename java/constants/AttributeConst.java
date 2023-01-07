@@ -6,11 +6,15 @@ package constants;
  */
 public enum AttributeConst {
 
+    //フラッシュメッセージ
+    FLUSH("flush"),
+
     //一覧画面
     PAGE("page"),
 
     //入力フォーム共通
     TOKEN("_token"),
+    ERR("errors"),
 
     //ユーザー管理
     USER("user"),

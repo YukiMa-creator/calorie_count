@@ -6,6 +6,9 @@ package constants;
  */
 public enum MessageConst {
 
+    //DB更新
+    I_REGISTERED("登録が完了しました。"),
+
     //バリテーション
     E_NOUSE_CODE("会員番号を入力してください。"),
     E_USE_CODE_EXIST("入力された会員番号は既に存在しています。"),
