@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.Table;
 
 import constants.JpaConst;
@@ -20,19 +21,15 @@ import lombok.Setter;
  *
  */
 @Table(name = JpaConst.TABLE_USE)
-/**
- * @NamedQueries({
- * @NamedQuery(
- * name = JpaConst.Q_USE_GET_ALL,
- * query = JpaConst.Q_USE_GET_ALL_DEF),
- * @NamedQuery(
- * name = JpaConst.Q_USE_COUNT,
- * query = JpaConst.Q_USE_COUNT_DEF),
- * @NamedQuery(
- * name = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE,
- * query = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE_DEF),
- *)}
- */
+
+@NamedQueries({
+   @NamedQuery(
+name = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE,
+query = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE_DEF),
+   @NamedQuery(
+           )
+)}
+
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
 @Setter //全てのクラスフィールドについてsetterを自動生成する
 @NoArgsConstructor //引数なしのコンストラクタを自動生成する
@@ -59,6 +56,12 @@ public class User {
      */
     @Column(name = JpaConst.USE_COL_NAME, nullable = false)
     private String name;
+
+    /**
+     * メールアドレス
+     */
+    @Column(name = JpaConst.USE_COL_MAIL, nullable = false)
+    private String mail;
 
     /**
      * パスワード

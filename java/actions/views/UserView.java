@@ -33,6 +33,11 @@ public class UserView {
     private String name;
 
     /**
+     * メールアドレス
+     */
+    private String mail;
+
+    /**
      * パスワード
      */
     private String password;

@@ -23,6 +23,7 @@ public class UserConverter {
                 uv.getId(),
                 uv.getCode(),
                 uv.getName(),
+                uv.getMail(),
                 uv.getPassword(),
                 uv.getCreatedAt(),
                 uv.getUpdatedAt());
@@ -43,6 +44,7 @@ public class UserConverter {
                 u.getId(),
                 u.getCode(),
                 u.getName(),
+                u.getMail(),
                 u.getPassword(),
                 u.getCreatedAt(),
                 u.getUpdatedAt());
@@ -71,6 +73,7 @@ public class UserConverter {
         u.setId(uv.getId());
         u.setCode(uv.getCode());
         u.setName(uv.getName());
+        u.setMail(uv.getMail());
         u.setPassword(uv.getPassword());
         u.setCreatedAt(uv.getCreatedAt());
         u.setUpdatedAt(uv.getUpdatedAt());
