@@ -5,7 +5,7 @@
 <%@ page import="constants.AttributeConst" %>
 
 <c:set var="actUse" value="${ForwardConst.ACT_USE.getValue()}" />
-<c:set var="actAuth" value="${ForwardConst.ACT_AUTH.getValue()}" />
+<c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdit" value="${ForwardConst.CMD_EDIT.getValue()}" />
 
@@ -45,7 +45,7 @@
         <a href="<c:url value='?action=${actEmp}&command=${commEdit}&id=${user.id}' />">会員情報を修正する</a>
         </p>
         <p>
-        <a href="<c:url value='?action=${actAuth}&command=${commIdx}' />">トップページに戻る</a>
+        <a href="<c:url value='?action=${actTop}&command=${commIdx}' />">トップページに戻る</a>
         </p>
 
     </c:param>

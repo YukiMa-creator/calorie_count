@@ -35,5 +35,9 @@ public interface JpaConst {
     //会員番号とハッシュ化済みパスワードを条件に未削除の従業員を取得する
     String Q_USE_BY_CODE_AND_PASS = ENTITY_USE + ".getByCodeAndPass";
     String Q_USE_BY_CODE_AND_PASS_DEF = "SELECT u FROM User AS u WHERE u.code = : " + JPQL_PARM_CODE + " AND u.password = : " + JPQL_PARM_PASSWORD;
+//指定した会員番号を保持するユーザーの件数を取得する
+    String Q_USE_COUNT_REGISTERED_BY_CODE = ENTITY_USE + ".countRegisteresByCode";
+    String Q_USE_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(u) FROM Use AS u WHERE u.code = :" + JPQL_PARM_CODE;
+
 
 }

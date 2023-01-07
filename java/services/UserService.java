@@ -124,7 +124,7 @@ public class UserService extends ServiceBase {
      * idを条件に従業員データを削除する
      * @param id
      */
-    public void destroy (UserView uv) {
+    public void destroy(UserView uv) {
 
         em.getTransaction().begin();
         //idを条件に登録済みの従業員情報を取得する
@@ -145,10 +145,10 @@ public class UserService extends ServiceBase {
     public Boolean validateLogin(String code, String plainPass, String pepper) {
 
         boolean isValidUser = false;
-        if(code != null && !code.equals("") && plainPass != null &&!plainPass.equals("")) {
+        if (code != null && !code.equals("") && plainPass != null && !plainPass.equals("")) {
             UserView uv = findOne(code, plainPass, pepper);
 
-            if(uv != null && uv.getId() != null) {
+            if (uv != null && uv.getId() != null) {
 
                 //データが取得できた場合、認証成功
                 isValidUser = true;
@@ -191,5 +191,19 @@ public class UserService extends ServiceBase {
         User u = em.find(User.class, id);
 
         return u;
+    }
+
+    /**
+     * 会員番号を条件に該当するデータの件数を取得し、返却する
+     * @param code 会員番号
+     * @return 該当するデータの件数
+     */
+    public long countByCode(String code) {
+
+        //指定した会員番号を保持するユーザーの件数を取得する
+        long users_count = (long) em.createNamedQuery(JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_CODE, code)
+                .getSingleResult();
+        return users_count;
     }
 }
