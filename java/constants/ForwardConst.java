@@ -15,11 +15,14 @@ public enum ForwardConst {
     CMD_INDEX("index"),
     CMD_CREATE("create"),
     CMD_EDIT("edit"),
+    CMD_UPDATE("update"),
+    CMD_DESTROY("destroy"),
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),
     FW_USE_NEW("users/new"),
     FW_USE_SHOW("users/show"),
+    FW_USE_EDIT("users/edit"),
 
     /**
      * 文字列
