@@ -4,7 +4,9 @@
 <%@ page import="constants.AttributeConst" %>
 
 <c:set var="action" value="${ForwardConst.ACT_AUTH.getValue()}" />
+<c:set var="actUse" value="${ForwardConst.ACT_USE.getValue()}" />
 <c:set var="command" value="${ForwardConst,CMD_LOGIN.getValue()}" />
+<c:set var="commNew" value="${ForwardConst,CMD_NEW.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -31,5 +33,8 @@
         <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
         <button type="submit">ログイン</button>
         </form>
+        <p>
+        <a href="<c:url value='?action=${actUse}&command=${commNew}' />">新規会員登録はこちら</a>
+        </p>
     </c:param>
 </c:import>
