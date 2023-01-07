@@ -138,4 +138,53 @@ public class UserAction extends ActionBase {
         forward(ForwardConst.FW_USE_EDIT);
 
     }
+
+    /**
+     * 更新を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void update() throws ServletException, IOException{
+
+        //CSRF対策 tokenのチェック
+        if(checkToken()) {
+            //パラメータの値を元に会員情報のインスタンスを作成する
+            UserView uv = new UserView(
+                    toNumber(getRequestParam(AttributeConst.USE_ID)),
+                    getRequestParam(AttributeConst.USE_CODE),
+                    getRequestParam(AttributeConst.USE_NAME),
+                    getRequestParam(AttributeConst.USE_MAIL),
+                    getRequestParam(AttributeConst.USE_PASS),
+                    null,
+                    null
+                    );
+
+            //アプリケーションスコープからpepper文字列を取得
+            String pepper = getContextScope(PropertyConst.PEPPER);
+
+            //会員情報更新
+            List<String> errors = service.update(uv, pepper);
+
+            if(errors.size() > 0) {
+                //更新中にエラーが発生した場合
+
+                putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+                putRequestScope(AttributeConst.USER, uv); //入力された会員情報
+                putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
+
+                //編集画面を再表示
+                forward(ForwardConst.FW_USE_EDIT);
+            } else {
+                //更新中にエラーがなかった場合
+
+                //セッションに更新完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+                //一覧画面にリダイレクト
+                redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_INDEX);
+            }
+        }
+
+
+    }
 }
