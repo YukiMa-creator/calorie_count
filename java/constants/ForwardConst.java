@@ -8,12 +8,17 @@ public enum ForwardConst {
 
     //action
     ACT("action"),
+    ACT_USE("User"),
 
     //command
     CMD("command"),
+    CMD_INDEX("index"),
+    CMD_CREATE("create"),
+    ACT_AUTH("Auth"),
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),
+    FW_USE_NEW("users/new"),
 
     /**
      * 文字列
