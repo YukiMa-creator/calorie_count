@@ -124,7 +124,7 @@ public class UserService extends ServiceBase {
      * idを条件に従業員データを削除する
      * @param id
      */
-    public void destory(UserView uv) {
+    public void destroy (UserView uv) {
 
         em.getTransaction().begin();
         //idを条件に登録済みの従業員情報を取得する

@@ -8,6 +8,7 @@ public enum ForwardConst {
 
     //action
     ACT("action"),
+    ACT_TOP("Top"),
     ACT_USE("User"),
     ACT_AUTH("Auth"),
     //command
@@ -17,6 +18,7 @@ public enum ForwardConst {
     CMD_EDIT("edit"),
     CMD_UPDATE("update"),
     CMD_DESTROY("destroy"),
+    CMD_LOGIN("login"),
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),

@@ -106,7 +106,7 @@ public class UserAction extends ActionBase {
         //idを条件に従業員データを取得する
         UserView uv = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
 
-        if(uv == null) {
+        if (uv == null) {
 
             //データが取得できなかった場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
@@ -119,12 +119,12 @@ public class UserAction extends ActionBase {
         forward(ForwardConst.FW_USE_SHOW);
     }
 
-    public void edit() throws ServletException, IOException{
+    public void edit() throws ServletException, IOException {
 
         //idを条件にユーザーデータを取得する
         UserView uv = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
 
-        if(uv == null) {
+        if (uv == null) {
 
             //データが取得できなかった場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
@@ -144,10 +144,10 @@ public class UserAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    public void update() throws ServletException, IOException{
+    public void update() throws ServletException, IOException {
 
         //CSRF対策 tokenのチェック
-        if(checkToken()) {
+        if (checkToken()) {
             //パラメータの値を元に会員情報のインスタンスを作成する
             UserView uv = new UserView(
                     toNumber(getRequestParam(AttributeConst.USE_ID)),
@@ -156,8 +156,7 @@ public class UserAction extends ActionBase {
                     getRequestParam(AttributeConst.USE_MAIL),
                     getRequestParam(AttributeConst.USE_PASS),
                     null,
-                    null
-                    );
+                    null);
 
             //アプリケーションスコープからpepper文字列を取得
             String pepper = getContextScope(PropertyConst.PEPPER);
@@ -165,7 +164,7 @@ public class UserAction extends ActionBase {
             //会員情報更新
             List<String> errors = service.update(uv, pepper);
 
-            if(errors.size() > 0) {
+            if (errors.size() > 0) {
                 //更新中にエラーが発生した場合
 
                 putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
@@ -182,9 +181,30 @@ public class UserAction extends ActionBase {
 
                 //一覧画面にリダイレクト
                 redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_INDEX);
-            }
-        }
 
+            }
+
+        }
+    }
+
+    /**
+     *削除する
+     */
+    public void destroy() throws ServletException, IOException {
+
+        //CSRF対策 tokenのチェック
+        if (checkToken()) {
+
+            //idを条件に会員データを削除する
+
+            UserView uv = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
+            service.destroy(uv);
+
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_LOGIN);
+        }
 
     }
 }
