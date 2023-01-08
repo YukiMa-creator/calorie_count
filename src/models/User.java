@@ -26,7 +26,10 @@ import lombok.Setter;
 @NamedQueries({
     @NamedQuery(
             name = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE,
-            query = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE_DEF)
+            query = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_USE_BY_CODE_AND_PASS,
+            query = JpaConst.Q_USE_BY_CODE_AND_PASS_DEF),
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)

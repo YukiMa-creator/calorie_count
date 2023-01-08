@@ -9,7 +9,7 @@
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdit" value="${ForwardConst.CMD_EDIT.getValue()}" />
 
-<c:import url="/WEB-INF/views/layout/app.jsp">
+<c:import url="../layout/app.jsp">
     <c:param name="content">
 
         <h2>id : ${user.id} の会員情報 詳細ページ</h2>
@@ -42,7 +42,7 @@
         </table>
 
         <p>
-        <a href="<c:url value='?action=${actEmp}&command=${commEdit}&id=${user.id}' />">会員情報を修正する</a>
+        <a href="<c:url value='?action=${actUse}&command=${commEdit}&id=${user.id}' />">会員情報を修正する</a>
         </p>
         <p>
         <a href="<c:url value='?action=${actTop}&command=${commIdx}' />">トップページに戻る</a>

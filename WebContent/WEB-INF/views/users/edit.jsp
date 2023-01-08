@@ -21,7 +21,6 @@
         <a href="#" onclick="confirmDestroy();">この会員情報を削除する</a>
         </p>
         <form method="POST" action="<c:url value='?action=${action}&command=${commDel}' />">
-        <input type="hidden" name="${AttributeConst.USE_ID.getValue()}" value="${user.id}" />
         <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
         </form>
         <script>

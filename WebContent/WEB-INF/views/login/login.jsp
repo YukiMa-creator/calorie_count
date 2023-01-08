@@ -5,10 +5,10 @@
 
 <c:set var="action" value="${ForwardConst.ACT_AUTH.getValue()}" />
 <c:set var="actUse" value="${ForwardConst.ACT_USE.getValue()}" />
-<c:set var="command" value="${ForwardConst,CMD_LOGIN.getValue()}" />
-<c:set var="commNew" value="${ForwardConst,CMD_NEW.getValue()}" />
+<c:set var="command" value="${ForwardConst.CMD_LOGIN.getValue()}" />
+<c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 
-<c:import url="/WEB-INF/views/layout/app.jsp">
+<c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${loginError}">
             <div id="flush_error">

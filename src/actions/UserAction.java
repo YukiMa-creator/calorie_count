@@ -91,7 +91,7 @@ public class UserAction extends ActionBase {
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
                 //一覧画面にリダイレクト
-                redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_INDEX);
+                redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
             }
         }
     }
@@ -180,7 +180,7 @@ public class UserAction extends ActionBase {
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
 
                 //一覧画面にリダイレクト
-                redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_INDEX);
+                redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
 
             }
 
@@ -192,19 +192,15 @@ public class UserAction extends ActionBase {
      */
     public void destroy() throws ServletException, IOException {
 
-        //CSRF対策 tokenのチェック
-        if (checkToken()) {
+        UserView uv = getSessionScope(AttributeConst.LOGIN_USE);
+        service.destroy(uv);
 
-            //idを条件に会員データを削除する
+        putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
-            UserView uv = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
-            service.destroy(uv);
+        removeSessionScope(AttributeConst.LOGIN_USE);
 
-            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
-
-            //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_LOGIN);
-        }
-
+        //一覧画面にリダイレクト
+        redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
     }
+
 }

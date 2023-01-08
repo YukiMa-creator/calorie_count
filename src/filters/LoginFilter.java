@@ -47,6 +47,7 @@ public class LoginFilter implements Filter {
         if (servletPath.matches("/css.*")) {
             // CSSフォルダ内は認証処理から除外する
             chain.doFilter(request, response);
+
         } else {
             HttpSession session = ((HttpServletRequest) request).getSession();
 
@@ -54,11 +55,11 @@ public class LoginFilter implements Filter {
             String action = request.getParameter(ForwardConst.ACT.getValue());
             String command = request.getParameter(ForwardConst.CMD.getValue());
 
-            //セッションからログインしている会員の情報を取得
+            //セッションからログインしている従業員の情報を取得
             UserView uv = (UserView) session.getAttribute(AttributeConst.LOGIN_USE.getValue());
 
             if (uv == null) {
-                //末ログイン
+                //未ログイン
 
                 if (!(ForwardConst.ACT_AUTH.getValue().equals(action)
                         && (ForwardConst.CMD_SHOW_LOGIN.getValue().equals(command)
@@ -70,37 +71,39 @@ public class LoginFilter implements Filter {
                                     + "?action=" + ForwardConst.ACT_AUTH.getValue()
                                     + "&command=" + ForwardConst.CMD_SHOW_LOGIN.getValue());
                     return;
-                } else {
-                    //ログイン済
+                }
+            } else {
+                //ログイン済
 
-                    if (ForwardConst.ACT_AUTH.getValue().equals(action)) {
-                        //認証系Actionを行おうとしている場合
+                if (ForwardConst.ACT_AUTH.getValue().equals(action)) {
+                    //認証系Actionを行おうとしている場合
 
-                        if (ForwardConst.CMD_SHOW_LOGIN.getValue().equals(command)) {
-                            //ログインページの表示はトップ画面にリダイレクト
-                            ((HttpServletResponse) response).sendRedirect(
-                                    contextPath
-                                            + "?action=" + ForwardConst.ACT_TOP.getValue()
-                                            + "&command=" + ForwardConst.CMD_INDEX.getValue());
-                            return;
-                        } else if (ForwardConst.CMD_LOGOUT.getValue().equals(command)) {
-                            //ログアウトの実施は許可
+                    if (ForwardConst.CMD_SHOW_LOGIN.getValue().equals(command)) {
+                        //ログインページの表示はトップ画面にリダイレクト
+                        ((HttpServletResponse) response).sendRedirect(
+                                contextPath
+                                        + "?action=" + ForwardConst.ACT_TOP.getValue()
+                                        + "&command=" + ForwardConst.CMD_INDEX.getValue());
+                        return;
 
-                        } else {
-                            //上記以外の認証系Actionはエラー画面
+                    } else if (ForwardConst.CMD_LOGOUT.getValue().equals(command)) {
+                        //ログアウトの実施は許可
 
-                            String forward = String.format("/WEB-INF/views/%s.jsp", "error/unknown");
-                            RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-                            dispatcher.forward(request, response);
+                    } else {
+                        //上記以外の認証系Actionはエラー画面
 
-                            return;
-                        }
+                        String forward = String.format("/WEB-INF/views/%s.jsp", "error/unknown");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+                        dispatcher.forward(request, response);
+
+                        return;
+
                     }
                 }
-
-                //次のフィルタまたはサーブレッド呼び出し
-                chain.doFilter(request, response);
             }
+
+            //次のフィルタまたはサーブレットを呼び出し
+            chain.doFilter(request, response);
         }
     }
 
