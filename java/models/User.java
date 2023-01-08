@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import constants.JpaConst;
@@ -26,7 +27,7 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE,
             query = JpaConst.Q_USE_COUNT_REGISTERED_BY_CODE_DEF)
-)}
+})
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
 @Setter //全てのクラスフィールドについてsetterを自動生成する

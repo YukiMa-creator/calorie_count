@@ -28,7 +28,7 @@ public enum AttributeConst {
     USE_NAME("name"),
     USE_MAIL("mail"),
     USE_PASS("password"),
-    USE_ID("id"),
+    USE_ID("id");
 
 
 

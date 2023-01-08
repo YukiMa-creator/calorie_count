@@ -31,7 +31,7 @@ public enum ForwardConst {
     FW_USE_SHOW("users/show"),
     FW_USE_EDIT("users/edit"),
     FW_TOP_INDEX("topPage/index"),
-    FW_LOGIN("login/login"),
+    FW_LOGIN("login/login");
 
     /**
      * 文字列
