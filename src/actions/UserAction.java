@@ -113,7 +113,7 @@ public class UserAction extends ActionBase {
             return;
         }
 
-        putRequestScope(AttributeConst.USER, uv); //取得した会員情報
+        putRequestScope(AttributeConst.LOGIN_USE, uv); //取得した会員情報
 
         //詳細画面を表示
         forward(ForwardConst.FW_USE_SHOW);
@@ -201,6 +201,8 @@ public class UserAction extends ActionBase {
 
         //一覧画面にリダイレクト
         redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
+
+
     }
 
 }
