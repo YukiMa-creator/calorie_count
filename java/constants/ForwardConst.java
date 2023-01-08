@@ -11,6 +11,9 @@ public enum ForwardConst {
     ACT_TOP("Top"),
     ACT_USE("User"),
     ACT_AUTH("Auth"),
+    ACT_CAL("Calorie"),
+    ACT_FOD("Food"),
+
     //command
     CMD("command"),
     CMD_INDEX("index"),
@@ -19,6 +22,8 @@ public enum ForwardConst {
     CMD_UPDATE("update"),
     CMD_DESTROY("destroy"),
     CMD_LOGIN("login"),
+    CMD_SHOW_LOGIN("showLogin"),
+    CMD_LOGOUT("logout"),
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),

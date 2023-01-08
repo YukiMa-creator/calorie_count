@@ -11,7 +11,7 @@ public enum MessageConst {
     I_UPDATED("更新が完了しました。"),
     I_DELETED("削除が完了しました。"),
     I_LOGINED("ログインしました。"),
-
+    I_LOGOUT("ログアウトしました。"),
     //バリテーション
     E_NOUSE_CODE("会員番号を入力してください。"),
     E_USE_CODE_EXIST("入力された会員番号は既に存在しています。"),
