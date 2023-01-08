@@ -68,7 +68,7 @@ public class LoginFilter implements Filter {
                     ((HttpServletResponse) response).sendRedirect(
                             contextPath
                                     + "?action=" + ForwardConst.ACT_AUTH.getValue()
-                                    + "&command" + ForwardConst.CMD_SHOW_LOGIN.getValue());
+                                    + "&command=" + ForwardConst.CMD_SHOW_LOGIN.getValue());
                     return;
                 } else {
                     //ログイン済
