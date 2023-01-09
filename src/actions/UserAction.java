@@ -41,8 +41,11 @@ public class UserAction extends ActionBase {
      */
     public void entryNew() throws ServletException, IOException {
 
-        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSPF対策用トークン
-        putRequestScope(AttributeConst.USER, new UserView()); //空のユーザーインスタンス
+        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+
+        //会員の空インスタンス
+        UserView uv = new UserView();
+        putRequestScope(AttributeConst.USER, uv); //日付のみ設定済みの日報インスタンス
 
         //新規登録画面を表示
         forward(ForwardConst.FW_USE_NEW);
