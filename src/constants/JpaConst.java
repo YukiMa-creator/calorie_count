@@ -43,6 +43,7 @@ public interface JpaConst {
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //会員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
+    String JPQL_PARM_USER = "user"; //会員
 
 
     //NamedQueryのnameとquery
@@ -52,5 +53,18 @@ public interface JpaConst {
 //指定した会員番号を保持するユーザーの件数を取得する
     String Q_USE_COUNT_REGISTERED_BY_CODE = ENTITY_USE + ".countRegisteredByCode";
     String Q_USE_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(u) FROM User AS u WHERE u.code = :" + JPQL_PARM_CODE;
+
+  //データ取得件数の最大値
+    int ROW_PER_PAGE = 15; //1ページに表示するレコードの数
+
+    //指定した従業員が作成した日報を全件idの降順で取得する
+    String Q_FOD_GET_ALL_MINE = ENTITY_FOD + ".getAllMine";
+    String Q_FOD_GET_ALL_MINE_DEF = "SELECT f FROM Food AS f WHERE f.user = :" + JPQL_PARM_USER + " ORDER BY f.id DESC";
+  //指定した従業員が作成した日報の件数を取得する
+    String Q_FOD_COUNT_ALL_MINE = ENTITY_FOD + ".countAllMine";
+    String Q_FOD_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Food AS f WHERE f.user = :" + JPQL_PARM_USER;
+  //指定した会員番号を保持するユーザーの件数を取得する
+    String Q_FOD_COUNT_REGISTERED_BY_CODE = ENTITY_FOD + ".countRegisteredByCode";
+    String Q_FOD_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(f) FROM Food AS f WHERE f.code = :" + JPQL_PARM_CODE;
 
 }

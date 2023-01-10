@@ -14,9 +14,14 @@ public enum MessageConst {
     I_LOGOUT("ログアウトしました。"),
     //バリテーション
     E_NOUSE_CODE("会員番号を入力してください。"),
+    E_NOUSE_FCODE("食品番号を入力してください。"),
     E_USE_CODE_EXIST("入力された会員番号は既に存在しています。"),
+    E_USE_FCODE_EXIST("入力された食品番号は既に存在しています。"),
     E_NONAME("氏名を入力してください。"),
+    E_FNONAME("食品を入力してください。"),
     E_NOPASSWORD("パスワードを入力してください。"),
+    E_NOAMOUNT("量を入力してください。"),
+    E_NOCAL("カロリーを入力してください。"),
     E_NOMAIL("メールアドレスを入力してください。");
     /**
      * 文字列
