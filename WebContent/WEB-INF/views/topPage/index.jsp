@@ -1,6 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="constants.ForwardConst"%>
+
+<c:set var="actFod" value="${ForwardConst.ACT_FOD.getValue()}" />
+<c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
+<c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
+
 
 <c:import url="../layout/app.jsp">
     <c:param name="content">
@@ -8,7 +15,11 @@
             <div id="flush_success">
                 <c:out value="${flush}"></c:out>
             </div>
-            </c:if>
-            <h2>カロリーカウントシステムへようこそ</h2>
+        </c:if>
+        <h2>カロリーカウントシステムへようこそ</h2>
+
+        <p>
+            <a href="<c:url value='?action=${actFod}&command=${commIdx}' />">food</a>
+        </p>
     </c:param>
 </c:import>

@@ -10,6 +10,7 @@ public enum AttributeConst {
     FLUSH("flush"),
 
     //一覧画面
+    MAX_ROW("maxRow"),
     PAGE("page"),
 
     //入力フォーム共通
@@ -28,7 +29,19 @@ public enum AttributeConst {
     USE_NAME("name"),
     USE_MAIL("mail"),
     USE_PASS("password"),
-    USE_ID("id");
+    USE_ID("id"),
+
+  //フード管理
+    FOOD("food"),
+    FOD_CODE("code"),
+    FOD_NAME("name"),
+    FOD_AMOUNT("amount"),
+    FOD_CAL("cal"),
+    FOD_ID("id"),
+    FOODS("foods"),
+    FOD_COUNT("foods_count"),
+
+    ;
 
 
 

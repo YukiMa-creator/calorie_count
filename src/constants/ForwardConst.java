@@ -33,6 +33,8 @@ public enum ForwardConst {
     FW_USE_SHOW("users/show"),
     FW_USE_EDIT("users/edit"),
     FW_TOP_INDEX("topPage/index"),
+    FW_FOD_INDEX("foods/index"),
+    FW_FOD_NEW("foods/new"),
     FW_LOGIN("login/login");
 
     /**

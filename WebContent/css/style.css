@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@CHARSET "UTF-8";
 
 body {
     color: #333333;
@@ -135,29 +135,47 @@ select {
 h1 a {
     color: #eeeeee;
 }
-table#report_list th{
+
+table#food_list th {
     font-weight: bold;
     padding: 10px 2%;
 }
 
-table#report_list .report_name{
-    width: 20%;
+table#food_list .food_name {
+    width: 13%;
     padding: 10px 2%;
 }
-table#report_list .report_date{
-    width: 20%;
-}
-table#report_list .report_title{
-    width: 37%;
-}
-table#report_list .report_action{
+
+table#food_list .food_code {
     width: 13%;
 }
-pre{
-    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+
+table#food_list .food_cal {
+    width: 13%;
 }
 
-h3{
+table#food_list .food_create {
+    width: 13%;
+}
+
+table#food_list .food_update {
+    width: 13%;
+}
+
+table#report_list .food_amount {
+    width: 13%;
+}
+
+table#report_list .food_action {
+    width: 12%;
+}
+
+pre {
+    font-family: "Hiragino Kaku Gothic Pro", Meiryo, "MS PGothic", Helvetica,
+        Arial, sans-serif;
+}
+
+h3 {
     font-size: larger;
 }
 
@@ -170,6 +188,7 @@ table#good_list .good_name {
     width: 20%;
     padding: 10px 2%;
 }
+
 table#good_list .good_date {
     width: 20%;
 }
