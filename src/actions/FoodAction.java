@@ -130,7 +130,34 @@ public class FoodAction extends ActionBase {
                 //一覧画面にリダイレクト
                 redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);
             }
-
         }
+    }
+
+    /**
+     * 編集画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void edit() throws ServletException, IOException {
+
+        //idを条件にFOODデータを取得する
+        FoodView fv = service.findOne(toNumber(getRequestParam(AttributeConst.FOD_ID)));
+
+        //セッションからログイン中の会員情報を取得
+        UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
+
+        if (uv == null || uv.getId() != fv.getUser().getId()) {
+            //該当のFOODデータが存在しない、またはログインしている会員がFOODの製作者でない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+        } else {
+
+            putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策用トークン
+            putRequestScope(AttributeConst.FOOD, fv); //取得したFOODデータ
+
+            //編集画面を表示
+            forward(ForwardConst.FW_FOD_EDIT);
+        }
+
     }
 }
