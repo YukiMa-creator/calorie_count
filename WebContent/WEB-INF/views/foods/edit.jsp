@@ -10,7 +10,7 @@
     <c:param name="content">
         <h2>FOOD　編集ページ</h2>
 
-        <form method="POST" action="<c:url value='?action=${action}&command=${commCrt}' />">
+        <form method="POST" action="<c:url value='?action=${action}&command=${commUpd}' />">
             <c:import url="_form.jsp" />
         </form>
 

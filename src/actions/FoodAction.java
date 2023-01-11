@@ -160,4 +160,46 @@ public class FoodAction extends ActionBase {
         }
 
     }
+
+    /**
+     * 更新を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void update() throws ServletException, IOException {
+
+        //CSRF対策 tokenチェック
+        if(checkToken()) {
+
+            //idを条件にFOODデータを取得する
+            FoodView fv = service.findOne(toNumber(getRequestParam(AttributeConst.FOD_ID)));
+
+            //入力されたFOOD内容を設定
+            fv.setCode(getRequestParam(AttributeConst.FOD_CODE));
+            fv.setName(getRequestParam(AttributeConst.FOD_NAME));
+            fv.setAmount(getRequestParam(AttributeConst.FOD_AMOUNT));
+            fv.setKcal(getRequestParam(AttributeConst.FOD_CAL));
+
+            //FOODデータを更新する
+            List<String> errors = service.update(fv);
+
+            if(errors.size() > 0) {
+                //更新中にエラーが発生した場合
+
+                putRequestScope(AttributeConst.TOKEN, getTokenId());
+                putRequestScope(AttributeConst.FOOD, fv);
+                putRequestScope(AttributeConst.ERR, errors);
+
+                //編集画面を再表示
+                forward(ForwardConst.FW_FOD_EDIT);
+            } else {
+                //更新中にエラーがなかった場合
+
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+                //一覧画面にリダイレクト
+                redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);
+            }
+        }
+    }
 }
