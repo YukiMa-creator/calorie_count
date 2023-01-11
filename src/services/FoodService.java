@@ -166,4 +166,19 @@ public class FoodService extends ServiceBase {
                 .getSingleResult();
         return foods_count;
     }
+
+    /**
+     * idを条件にFOODデータを削除する
+     * @param id
+     */
+    public FoodView destroy(FoodView fv) {
+
+        em.getTransaction().begin();
+      //idを条件に登録済みの従業員情報を取得する
+        Food f = findOneInternal(fv.getId());
+        em.remove(f); //データ削除
+        em.getTransaction().commit();
+        return fv;
+
+    }
 }

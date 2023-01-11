@@ -169,7 +169,7 @@ public class FoodAction extends ActionBase {
     public void update() throws ServletException, IOException {
 
         //CSRF対策 tokenチェック
-        if(checkToken()) {
+        if (checkToken()) {
 
             //idを条件にFOODデータを取得する
             FoodView fv = service.findOne(toNumber(getRequestParam(AttributeConst.FOD_ID)));
@@ -183,7 +183,7 @@ public class FoodAction extends ActionBase {
             //FOODデータを更新する
             List<String> errors = service.update(fv);
 
-            if(errors.size() > 0) {
+            if (errors.size() > 0) {
                 //更新中にエラーが発生した場合
 
                 putRequestScope(AttributeConst.TOKEN, getTokenId());
@@ -202,4 +202,24 @@ public class FoodAction extends ActionBase {
             }
         }
     }
+
+    /**
+     *削除する
+     */
+    public void destroy() throws ServletException, IOException {
+        //CSRF対策 tokenチェック
+        if (checkToken()) {
+
+            //idを条件にFOODデータを取得する
+            FoodView fv = service.findOne(toNumber(getRequestParam(AttributeConst.FOD_ID)));
+
+            service.destroy(fv);
+
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);
+        }
+    }
+
 }
