@@ -12,7 +12,7 @@ public interface JpaConst {
     //ユーザーテーブル
     String TABLE_USE = "users"; //テーブル名
     String TABLE_CAL = "calories"; //テーブル名
-  //ユーザーテーブルカラム
+    //ユーザーテーブルカラム
     String USE_COL_ID = "id"; //id
     String USE_COL_CODE = "code"; //食品番号
     String USE_COL_NAME = "name"; //名前
@@ -28,12 +28,10 @@ public interface JpaConst {
     String FOD_COL_CODE = "code"; //会員番号
     String FOD_COL_USE = "user_id"; //foodを作成した会員のid
     String FOD_COL_NAME = "name"; //氏名
-    String FOD_COL_AMOUNT = "amaunt"; //量
-    String FOD_COL_CAL = "cal"; //カロリー
+    String FOD_COL_AMOUNT = "amount"; //量
+    String FOD_COL_CAL = "kcal"; //カロリー
     String FOD_COL_CREATE_AT = "created_at"; //登録日時
     String FOD_COL_UPDATE_AT = "updated_at"; //更新日時
-
-
 
     //Entity名
     String ENTITY_USE = "user"; //ユーザー
@@ -45,26 +43,24 @@ public interface JpaConst {
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_USER = "user"; //会員
 
-
     //NamedQueryのnameとquery
     //会員番号とハッシュ化済みパスワードを条件に会員を取得する
     String Q_USE_BY_CODE_AND_PASS = ENTITY_USE + ".getByCodeAndPass";
-    String Q_USE_BY_CODE_AND_PASS_DEF = "SELECT u FROM User AS u WHERE u.code = :" + JPQL_PARM_CODE + " AND u.password = :" + JPQL_PARM_PASSWORD;
-//指定した会員番号を保持するユーザーの件数を取得する
+    String Q_USE_BY_CODE_AND_PASS_DEF = "SELECT u FROM User AS u WHERE u.code = :" + JPQL_PARM_CODE
+            + " AND u.password = :" + JPQL_PARM_PASSWORD;
+    //指定した会員番号を保持するユーザーの件数を取得する
     String Q_USE_COUNT_REGISTERED_BY_CODE = ENTITY_USE + ".countRegisteredByCode";
     String Q_USE_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(u) FROM User AS u WHERE u.code = :" + JPQL_PARM_CODE;
-
-  //データ取得件数の最大値
-    int ROW_PER_PAGE = 15; //1ページに表示するレコードの数
-
     //指定した従業員が作成した日報を全件idの降順で取得する
     String Q_FOD_GET_ALL_MINE = ENTITY_FOD + ".getAllMine";
     String Q_FOD_GET_ALL_MINE_DEF = "SELECT f FROM Food AS f WHERE f.user = :" + JPQL_PARM_USER + " ORDER BY f.id DESC";
-  //指定した従業員が作成した日報の件数を取得する
+    //指定した従業員が作成した日報の件数を取得する
     String Q_FOD_COUNT_ALL_MINE = ENTITY_FOD + ".countAllMine";
     String Q_FOD_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Food AS f WHERE f.user = :" + JPQL_PARM_USER;
-  //指定した会員番号を保持するユーザーの件数を取得する
+    //指定した会員番号を保持するユーザーの件数を取得する
     String Q_FOD_COUNT_REGISTERED_BY_CODE = ENTITY_FOD + ".countRegisteredByCode";
     String Q_FOD_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(f) FROM Food AS f WHERE f.code = :" + JPQL_PARM_CODE;
 
+    //データ取得件数の最大値
+    int ROW_PER_PAGE = 15; //1ページに表示するレコードの数
 }

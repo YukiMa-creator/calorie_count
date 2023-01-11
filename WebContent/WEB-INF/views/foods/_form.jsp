@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="constants.ForwardConst" %>
+<%@ page import="constants.AttributeConst" %>
 
 <c:if test="${errors != null}">
     <div id="flush_error">
         入力内容にエラーがあります。<br />
         <c:forEach var="error" items="${errors}">
-        ・<c:out value="${error}" /><br />
+            ・<c:out value="${error}" /><br />
         </c:forEach>
 
     </div>
 </c:if>
 
 <label for="${AttributeConst.FOD_CODE.getValue()}">食品コード</label><br />
-<input type="text" name="${AttributeConst.FOD_CODE.getValue()}" id="${AttributeConst.FOD_CODE.getValue()}" value="${food.name}" />
+<input type="text" name="${AttributeConst.FOD_CODE.getValue()}" id="${AttributeConst.FOD_CODE.getValue()}" value="${food.code}" />
 <br /><br />
 
 <label for="${AttributeConst.FOD_NAME.getValue()}">食べ物</label><br />
@@ -26,8 +26,9 @@
 <br /><br />
 
 <label for="${AttributeConst.FOD_CAL.getValue()}">カロリー</label><br />
-<input type="text" name="${AttributeConst.FOD_CAL.getValue()}" id="${AttributeConst.FOD_CAL.getValue()}" value="${food.cal}" />
+<input type="text" name="${AttributeConst.FOD_CAL.getValue()}" id="${AttributeConst.FOD_CAL.getValue()}" value="${food.kcal}" />
 <br /><br />
-<input type="hidden" name="${AttributeConst.FOD_ID.getValue()}" value="${food.id}"/>
+
+<input type="hidden" name="${AttributeConst.FOD_ID.getValue()}" value="${food.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
 <button type="submit">決定</button>

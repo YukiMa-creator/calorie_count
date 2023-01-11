@@ -36,7 +36,7 @@ public enum AttributeConst {
     FOD_CODE("code"),
     FOD_NAME("name"),
     FOD_AMOUNT("amount"),
-    FOD_CAL("cal"),
+    FOD_CAL("kcal"),
     FOD_ID("id"),
     FOODS("foods"),
     FOD_COUNT("foods_count"),

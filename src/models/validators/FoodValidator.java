@@ -41,9 +41,9 @@ public class FoodValidator {
         }
 
       //カロリーのチェック
-        String calError = validateCal(fv.getCal());
-        if (!calError.equals("")) {
-            errors.add(calError);
+        String kcalError = validateKcal(fv.getKcal());
+        if (!kcalError.equals("")) {
+            errors.add(kcalError);
         }
 
     return errors;
@@ -67,10 +67,10 @@ public class FoodValidator {
         if (codeDuplicateCheckFlag) {
             //食品番号の重複チェックを実施
 
-            long foodCount = isDuplicateUser(service, code);
+            long foodsCount = isDuplicateFood(service, code);
 
             //同一会員番号が既に登録されている場合はエラーメッセージを返却
-            if (foodCount > 0) {
+            if (foodsCount > 0) {
                 return MessageConst.E_USE_FCODE_EXIST.getMessage();
             }
         }
@@ -84,10 +84,10 @@ public class FoodValidator {
      * @param code 食品番号
      * @return 会員テーブルに登録されている同一食品番号のデータの件数
      */
-    public static long isDuplicateUser(FoodService service, String code) {
+    public static long isDuplicateFood(FoodService service, String code) {
 
-        long foodCount = service.countByCode(code);
-        return foodCount;
+        long foodsCount = service.countByCode(code);
+        return foodsCount;
     }
 
     /**
@@ -125,9 +125,9 @@ public class FoodValidator {
      * @param mail メールアドレス
      * @return エラーメッセージ
      */
-    private static String validateCal(Integer cal) {
+    private static String validateKcal(String kcal) {
 
-        if (cal == null || cal.equals("")) {
+        if (kcal == null || kcal.equals("")) {
             return MessageConst.E_NOCAL.getMessage();
         }
 

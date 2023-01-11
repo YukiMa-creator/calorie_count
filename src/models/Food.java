@@ -32,6 +32,9 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_FOD_COUNT_ALL_MINE,
             query = JpaConst.Q_FOD_COUNT_ALL_MINE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_FOD_COUNT_REGISTERED_BY_CODE,
+            query = JpaConst.Q_FOD_COUNT_REGISTERED_BY_CODE_DEF)
 })
 
 @Getter
@@ -79,7 +82,7 @@ public class Food {
      * カロリー
      */
     @Column(name = JpaConst.FOD_COL_CAL, nullable = false)
-    private Integer cal;
+    private String kcal;
 
     /**
      * 登録日時
@@ -92,4 +95,5 @@ public class Food {
      */
     @Column(name = JpaConst.FOD_COL_UPDATE_AT, nullable = false)
     private LocalDateTime updatedAt;
+
 }

@@ -46,12 +46,12 @@ public class FoodView {
     /**
      * カロリー
      */
-    private Integer cal;
+    private String kcal;
 
     /**
      *登録日時
      */
-    private  LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     /**
      * 更新日時

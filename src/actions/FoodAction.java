@@ -10,6 +10,7 @@ import actions.views.UserView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
+import constants.MessageConst;
 import services.FoodService;
 
 /**
@@ -85,5 +86,51 @@ public class FoodAction extends ActionBase {
 
         //新規登録画面を表示
         forward(ForwardConst.FW_FOD_NEW);
+    }
+
+    public void create() throws ServletException, IOException {
+
+        //CSRF対策用トークン
+        if (checkToken()) {
+
+            //セッションからログイン中の従業員情報を取得
+            UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
+
+            //パラメータの値を元にFOOD情報のインスタンスを作成する
+
+            FoodView fv = new FoodView(
+                    null,
+                    uv,
+                    getRequestParam(AttributeConst.FOD_CODE),
+                    getRequestParam(AttributeConst.FOD_NAME),
+                    getRequestParam(AttributeConst.FOD_AMOUNT),
+                    getRequestParam(AttributeConst.FOD_CAL),
+                    null,
+                    null);
+
+            //FOOD情報登録
+            List<String> errors = service.create(fv);
+
+            if (errors.size() > 0) {
+                //登録中にエラーがあった場合
+
+                putRequestScope(AttributeConst.FOOD, fv);
+                putRequestScope(AttributeConst.TOKEN, getTokenId());
+                putRequestScope(AttributeConst.ERR, errors);
+
+                //新規登録画面を再表示する
+                forward(ForwardConst.FW_FOD_NEW);
+
+            } else {
+                //登録中にエラーがなかった場合
+
+                //セッションに登録完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
+
+                //一覧画面にリダイレクト
+                redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);
+            }
+
+        }
     }
 }
