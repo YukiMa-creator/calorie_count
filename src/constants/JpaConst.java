@@ -63,9 +63,15 @@ public interface JpaConst {
     //指定した従業員が作成した日報を全件idの降順で取得する
     String Q_FOD_GET_ALL_MINE = ENTITY_FOD + ".getAllMine";
     String Q_FOD_GET_ALL_MINE_DEF = "SELECT f FROM Food AS f WHERE f.user = :" + JPQL_PARM_USER + " ORDER BY f.id DESC";
-    //指定した従業員が作成した日報の件数を取得する
+    //指定した会員が作成したカロリーを全件idの降順で取得する
+    String Q_CAL_GET_ALL_MINE = ENTITY_CAL + ".getAllMine";
+    String Q_CAL_GET_ALL_MINE_DEF = "SELECT c FROM Calorie AS c WHERE c.user = :" + JPQL_PARM_USER + " ORDER BY c.id DESC";
+  //指定した従業員が作成した日報の件数を取得する
     String Q_FOD_COUNT_ALL_MINE = ENTITY_FOD + ".countAllMine";
     String Q_FOD_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Food AS f WHERE f.user = :" + JPQL_PARM_USER;
+  //指定した会員が作成したカロリーの件数を取得する
+    String Q_CAL_COUNT_ALL_MINE = ENTITY_CAL + ".countAllMine";
+    String Q_CAL_COUNT_ALL_MINE_DEF = "SELECT COUNT(c) FROM Calorie AS c WHERE c.user = :" + JPQL_PARM_USER;
     //指定した会員番号を保持するユーザーの件数を取得する
     String Q_FOD_COUNT_REGISTERED_BY_CODE = ENTITY_FOD + ".countRegisteredByCode";
     String Q_FOD_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(f) FROM Food AS f WHERE f.code = :" + JPQL_PARM_CODE;

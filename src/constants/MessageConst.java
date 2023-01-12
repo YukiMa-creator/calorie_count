@@ -19,6 +19,7 @@ public enum MessageConst {
     E_USE_FCODE_EXIST("入力された食品番号は既に存在しています。"),
     E_NONAME("氏名を入力してください。"),
     E_FNONAME("食品を入力してください。"),
+    E_FNOFOOD("食品コードを入力してください。"),
     E_NOPASSWORD("パスワードを入力してください。"),
     E_NOAMOUNT("量を入力してください。"),
     E_NOCAL("カロリーを入力してください。"),
