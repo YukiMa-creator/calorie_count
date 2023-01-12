@@ -11,7 +11,6 @@ public interface JpaConst {
 
     //ユーザーテーブル
     String TABLE_USE = "users"; //テーブル名
-    String TABLE_CAL = "calories"; //テーブル名
     //ユーザーテーブルカラム
     String USE_COL_ID = "id"; //id
     String USE_COL_CODE = "code"; //食品番号
@@ -32,6 +31,16 @@ public interface JpaConst {
     String FOD_COL_CAL = "kcal"; //カロリー
     String FOD_COL_CREATE_AT = "created_at"; //登録日時
     String FOD_COL_UPDATE_AT = "updated_at"; //更新日時
+
+    //カロリーテーブル
+    String TABLE_CAL = "calories"; //テーブル名
+  //フードテーブルカラム
+    String CAL_COL_ID = "id"; //id
+    String CAL_COL_USE = "user_id"; //calorieを作成した会員のid
+    String CAL_COL_CAL_DATE = "calorie_date"; //いつの日報かを示す日付
+    String CAL_COL_FOD_CODE = "food_code"; //calorieを作成したfoodのcode
+    String CAL_COL_CREATE_AT = "created_at"; //登録日時
+    String CAL_COL_UPDATE_AT = "updated_at"; //更新日時
 
     //Entity名
     String ENTITY_USE = "user"; //ユーザー
