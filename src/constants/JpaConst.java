@@ -37,6 +37,7 @@ public interface JpaConst {
   //フードテーブルカラム
     String CAL_COL_ID = "id"; //id
     String CAL_COL_USE = "user_id"; //calorieを作成した会員のid
+    String CAL_COL_FOD = "food_id"; //calorieを作成したFOODのid
     String CAL_COL_CAL_DATE = "calorie_date"; //いつの日報かを示す日付
     String CAL_COL_FOD_CODE = "food_code"; //calorieを作成したfoodのcode
     String CAL_COL_CREATE_AT = "created_at"; //登録日時

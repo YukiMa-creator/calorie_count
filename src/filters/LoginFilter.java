@@ -44,9 +44,10 @@ public class LoginFilter implements Filter {
         String contextPath = ((HttpServletRequest) request).getContextPath();
         String servletPath = ((HttpServletRequest) request).getServletPath();
 
-        if (servletPath.matches("/WebContent/css.*")) {
+        if (servletPath.matches("/css.*")) {
             // CSSフォルダ内は認証処理から除外する
             chain.doFilter(request, response);
+
         } else {
             HttpSession session = ((HttpServletRequest) request).getSession();
 
@@ -64,26 +65,13 @@ public class LoginFilter implements Filter {
                         && (ForwardConst.CMD_SHOW_LOGIN.getValue().equals(command)
                                 || ForwardConst.CMD_LOGIN.getValue().equals(command)))) {
 
-                    if (ForwardConst.ACT_USE.getValue().equals(action)) {
-
-                        if (ForwardConst.CMD_NEW.getValue().equals(command)) {
-                            //ログインページの表示またはログイン実行以外はログインページにリダイレクト
-                            ((HttpServletResponse) response).sendRedirect(
-                                    contextPath
-                                            + "?action=" + ForwardConst.ACT_USE.getValue()
-                                            + "&command=" + ForwardConst.CMD_NEW.getValue());
-                            return;
-
-                        }
-                    }
-
-                        //ログインページの表示またはログイン実行以外はログインページにリダイレクト
-                        ((HttpServletResponse) response).sendRedirect(
-                                contextPath
-                                        + "?action=" + ForwardConst.ACT_AUTH.getValue()
-                                        + "&command=" + ForwardConst.CMD_SHOW_LOGIN.getValue());
-                        return;
-                    }
+                    //ログインページの表示またはログイン実行以外はログインページにリダイレクト
+                    ((HttpServletResponse) response).sendRedirect(
+                            contextPath
+                                    + "?action=" + ForwardConst.ACT_AUTH.getValue()
+                                    + "&command=" + ForwardConst.CMD_SHOW_LOGIN.getValue());
+                    return;
+                }
             } else {
                 //ログイン済
 
@@ -117,7 +105,6 @@ public class LoginFilter implements Filter {
             //次のフィルタまたはサーブレットを呼び出し
             chain.doFilter(request, response);
         }
-
     }
 
     /**

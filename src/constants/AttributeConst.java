@@ -41,6 +41,12 @@ public enum AttributeConst {
     FOODS("foods"),
     FOD_COUNT("foods_count"),
 
+    //カロリー管理
+    CALORIE("calorie"),
+    CAL_ID("id"),
+    CALORIES("calories"),
+    CAL_COUNT("calories_count"),
+
     ;
 
 
