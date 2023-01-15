@@ -49,10 +49,10 @@ public class CalorieAction extends ActionBase {
 
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
 
-        //日報情報の空インスタンスに、日報の日付＝今日の日付を設定する
+        //カロリー情報の空インスタンスに、カロリーの日付＝今日の日付を設定する
         CalorieView uv = new CalorieView();
         uv.setCalorieDate(LocalDateTime.now());
-        putRequestScope(AttributeConst.CALORIE, uv); //日付のみ設定済みの日報インスタンス
+        putRequestScope(AttributeConst.CALORIE, uv); //日付のみ設定済みのカロリーインスタンス
 
         //新規登録画面を表示
         forward(ForwardConst.FW_CAL_NEW);
@@ -67,7 +67,7 @@ public class CalorieAction extends ActionBase {
         //CSRF対策 tokenのチェック
         if (checkToken()) {
 
-            //日報の日付が入力されていなければ、今日の日付を設定
+            //カロリーの日付が入力されていなければ、今日の日付を設定
             LocalDateTime day = null;
             if (getRequestParam(AttributeConst.CAL_DATE) == null
                     || getRequestParam(AttributeConst.CAL_DATE).equals("")) {
@@ -76,22 +76,22 @@ public class CalorieAction extends ActionBase {
                 day = LocalDateTime.parse(getRequestParam(AttributeConst.CAL_DATE));
             }
 
-          //セッションからログイン中の従業員情報を取得
+          //セッションからログイン中の会員情報を取得
             UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
           //セッションからFOOD情報を取得
             FoodView fv = (FoodView) getSessionScope(AttributeConst.FOOD);
 
-            //パラメータの値をもとに日報情報のインスタンスを作成する
+            //パラメータの値をもとにカロリー情報のインスタンスを作成する
             CalorieView cv = new CalorieView(
                     null,
                     day,
-                    uv, //ログインしている従業員を、日報作成者として登録する
+                    uv, //ログインしている会員を、カロリー作成者として登録する
                     fv, //FOODを登録する
                     null,
                     null);
 
-            //日報情報登録
+            //カロリー情報登録
             List<String> errors = service.create(cv);
 
             if (errors.size() > 0) {
@@ -113,6 +113,29 @@ public class CalorieAction extends ActionBase {
                 //一覧画面にリダイレクト
                 redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
             }
+        }
+    }
+
+    /**
+     * 詳細画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void show() throws ServletException, IOException {
+
+        //idを条件にカロリーデータを取得する
+        CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
+
+        if (cv == null) {
+            //該当のカロリーデータが存在しない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+        } else {
+
+            putRequestScope(AttributeConst.CALORIE, cv); //取得したカロリーデータ
+
+            //詳細画面を表示
+            forward(ForwardConst.FW_CAL_SHOW);
         }
     }
 }
