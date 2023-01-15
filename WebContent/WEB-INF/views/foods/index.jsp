@@ -43,7 +43,7 @@
                         <td class="food_kcal"><c:out value="${food.kcal}" /></td>
                         <td class="food_create"><fmt:formatDate value='${foodCreateDay}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
                         <td class="food_update"><fmt:formatDate value='${foodUpdateDay}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
-                        <td class="food_action"><a href="<c:url value='?action=${actFod}&command=${commEdt}&id=${food.id}' />">編集・削除・記録</a></td>
+                        <td class="food_action"><a href="<c:url value='?action=${actFod}&command=${commEdt}&id=${food.id}' />">編集・記録</a></td>
                 </tr>
                 </c:forEach>
             </tbody>

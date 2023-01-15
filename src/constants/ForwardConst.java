@@ -38,6 +38,7 @@ public enum ForwardConst {
     FW_FOD_NEW("foods/new"),
     FW_CAL_NEW("calories/new"),
     FW_CAL_SHOW("calories/show"),
+    FW_CAL_EDIT("calories/edit"),
     FW_LOGIN("login/login");
 
     /**

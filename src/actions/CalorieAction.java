@@ -57,6 +57,7 @@ public class CalorieAction extends ActionBase {
         //新規登録画面を表示
         forward(ForwardConst.FW_CAL_NEW);
     }
+
     /**
      * 新規登録を行う
      * @throws ServletException
@@ -76,10 +77,10 @@ public class CalorieAction extends ActionBase {
                 day = LocalDateTime.parse(getRequestParam(AttributeConst.CAL_DATE));
             }
 
-          //セッションからログイン中の会員情報を取得
+            //セッションからログイン中の会員情報を取得
             UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-          //セッションからFOOD情報を取得
+            //セッションからFOOD情報を取得
             FoodView fv = (FoodView) getSessionScope(AttributeConst.FOOD);
 
             //パラメータの値をもとにカロリー情報のインスタンスを作成する
@@ -137,5 +138,34 @@ public class CalorieAction extends ActionBase {
             //詳細画面を表示
             forward(ForwardConst.FW_CAL_SHOW);
         }
+    }
+
+    /**
+     * 編集画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void edit() throws ServletException, IOException {
+
+        //idを条件にカロリーデータを取得する
+        CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
+
+        //セッションからログイン中の会員情報を取得
+        UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
+
+        if (cv == null || uv.getId() != cv.getUser().getId()) {
+            //該当のカロリーデータが存在しない、または
+            //ログインしている会員がカロリーの作成者でない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+        } else {
+
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+            putRequestScope(AttributeConst.CALORIE, cv); //取得したカロリーデータ
+
+            //編集画面を表示
+            forward(ForwardConst.FW_CAL_EDIT);
+        }
+
     }
 }

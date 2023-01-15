@@ -23,20 +23,6 @@
         <p>
             <a href="#" onclick="confirmDestroy();">このFOODを削除する</a>
         </p>
-        <form method="POST"
-            action="<c:url value='?action=${action}&command=${commDel}' />">
-            <input type="hidden" name="${AttributeConst.FOD_ID.getValue()}"
-                value="${food.id}" /> <input type="hidden"
-                name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
-        </form>
-        <script>
-            function confirmDestroy() {
-                if (confirm("本当に削除してよろしいですか？")) {
-                    document.forms[1].submit();
-                }
-            }
-        </script>
-
         <p>
             <a href="<c:url value='?action=${actCal}&command=${commNew}' />">CAROLIE登録はこちら</a>
         </p>
