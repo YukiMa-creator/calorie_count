@@ -30,7 +30,7 @@
                     <th class="report_action">操作</th>
                 </tr>
                 <c:forEach var="calorie" items="${calories}" varStatus="status">
-                    <fmt:parseDate value="${calorie.reportDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="calorietDay" type="date" />
+                    <fmt:parseDate value="${calorie.calorieDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="calorietDay" type="date" />
                     <tr class="row${status.count % 2}">
                         <td class="calorie_date"><fmt:formatDate value='${calorietDay}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
                         <td class="calorie_action"><a href="<c:url value='?action=${actCal}&command=${commShow}&id=${calorie.id}' />">詳細を見る</a></td>
