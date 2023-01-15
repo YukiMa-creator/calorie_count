@@ -44,6 +44,7 @@ public enum AttributeConst {
     //カロリー管理
     CALORIE("calorie"),
     CAL_ID("id"),
+    CAL_DATE("calorie_date"),
     CALORIES("calories"),
     CAL_COUNT("calories_count"),
 

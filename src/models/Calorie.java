@@ -67,7 +67,7 @@ public class Calorie {
      * FOODを登録したcalorie
      */
     @ManyToOne
-    @JoinColumn(name = JpaConst.CAL_COL_FOD_CODE, nullable = false)
+    @JoinColumn(name = JpaConst.CAL_COL_FOD, nullable = false)
     private Food food;
 
     /**

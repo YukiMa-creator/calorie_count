@@ -36,6 +36,7 @@ public enum ForwardConst {
     FW_TOP_INDEX("topPage/index"),
     FW_FOD_INDEX("foods/index"),
     FW_FOD_NEW("foods/new"),
+    FW_CAL_NEW("calories/new"),
     FW_LOGIN("login/login");
 
     /**

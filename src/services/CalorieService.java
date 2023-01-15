@@ -5,7 +5,6 @@ import java.util.List;
 
 import actions.views.CalorieConverter;
 import actions.views.CalorieView;
-import actions.views.FoodView;
 import actions.views.UserConverter;
 import actions.views.UserView;
 import constants.JpaConst;
@@ -58,15 +57,6 @@ public class CalorieService extends ServiceBase {
     }
 
     /**
-     * codeを条件に取得したデータをCalorieViewのインスタンスで返却する
-     * @param code
-     * @return 取得データのインスタンス
-     */
-    public CalorieView findOne(FoodView food) {
-        return CalorieConverter.toView(findOneInternal(food));
-    }
-
-    /**
      * 画面から入力されたカロリーの登録内容を元にデータを1件作成し、カロリーテーブルに登録する
      * @param cv カロリーの登録内容
      * @return バリデーションで発生したエラーのリスト
@@ -114,15 +104,6 @@ public class CalorieService extends ServiceBase {
      */
     private Calorie findOneInternal(int id) {
         return em.find(Calorie.class, id);
-    }
-
-    /**
-     * codeを条件にデータを1件取得する
-     * @param code
-     * @return 取得データのインスタンス
-     */
-    private Calorie findOneInternal(FoodView food) {
-        return em.find(Calorie.class, food);
     }
 
     /**

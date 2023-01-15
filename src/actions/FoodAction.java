@@ -154,6 +154,7 @@ public class FoodAction extends ActionBase {
 
             putRequestScope(AttributeConst.TOKEN, getTokenId());//CSRF対策用トークン
             putRequestScope(AttributeConst.FOOD, fv); //取得したFOODデータ
+            putSessionScope(AttributeConst.FOOD, fv);
 
             //編集画面を表示
             forward(ForwardConst.FW_FOD_EDIT);
@@ -216,6 +217,7 @@ public class FoodAction extends ActionBase {
             service.destroy(fv);
 
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+            removeSessionScope(AttributeConst.FOOD);
 
             //一覧画面にリダイレクト
             redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);

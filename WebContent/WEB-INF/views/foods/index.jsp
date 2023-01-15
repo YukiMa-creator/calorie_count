@@ -6,6 +6,7 @@
 <c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var="actUse" value="${ForwardConst.ACT_USE.getValue()}" />
 <c:set var="actFod" value="${ForwardConst.ACT_FOD.getValue()}" />
+<c:set var="actCal" value="${ForwardConst.ACT_CAL.getValue()}" />
 
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
@@ -29,7 +30,7 @@
                     <th class="food_kcal">カロリー</th>
                     <th class="food_create">登録日時</th>
                     <th class="food_update">更新日時</th>
-                    <th class="food_action">編集</th>
+                    <th class="food_action">操作</th>
                 </tr>
                 <c:forEach var="food" items="${foods}" varStatus="status">
                     <fmt:parseDate value="${food.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="foodCreateDay" type="date" />
@@ -42,7 +43,7 @@
                         <td class="food_kcal"><c:out value="${food.kcal}" /></td>
                         <td class="food_create"><fmt:formatDate value='${foodCreateDay}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
                         <td class="food_update"><fmt:formatDate value='${foodUpdateDay}' pattern='yyyy-MM-dd HH:mm:ss' /></td>
-                        <td class="food_action"><a href="<c:url value='?action=${actFod}&command=${commEdt}&id=${food.id}' />">編集する</a></td>
+                        <td class="food_action"><a href="<c:url value='?action=${actFod}&command=${commEdt}&id=${food.id}' />">編集・削除・記録</a></td>
                 </tr>
                 </c:forEach>
             </tbody>
