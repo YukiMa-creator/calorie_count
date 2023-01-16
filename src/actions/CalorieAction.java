@@ -133,6 +133,7 @@ public class CalorieAction extends ActionBase {
         } else {
 
             putRequestScope(AttributeConst.CALORIE, cv); //取得したカロリーデータ
+            putSessionScope(AttributeConst.CALORIE, cv); //取得したカロリーデータ
 
             //詳細画面を表示
             forward(ForwardConst.FW_CAL_SHOW);
@@ -144,9 +145,7 @@ public class CalorieAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    public void edit() throws ServletException, IOException {
-        //CSRF対策 tokenチェック
-        if (checkToken()) {
+    public void destroy() throws ServletException, IOException {
 
             //idを条件にCalorieデータを取得する
             CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
@@ -154,10 +153,7 @@ public class CalorieAction extends ActionBase {
             service.destroy(cv);
 
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
-
             //一覧画面にリダイレクト
             redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
     }
-
-}

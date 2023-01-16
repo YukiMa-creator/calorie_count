@@ -26,11 +26,10 @@
         <form method="POST"
             action="<c:url value='?action=${action}&command=${commDel}' />">
             <input type="hidden" name="${AttributeConst.USE_ID.getValue()}" value="${user.id}" />
-            <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
         </form>
         <script>
             function confirmDestroy() {
-                if (confirm("本当に削除してよろしいですか？")) {
+                if (confirm("本当に退会してよろしいですか？")) {
                     document.forms[1].submit();
                 }
             }

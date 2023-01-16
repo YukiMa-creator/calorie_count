@@ -20,7 +20,6 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <c:if test="${error == null}">
             <p>
                 <a href="#" onclick="confirmDestroy();">このFOODを削除する</a>
             </p>
@@ -37,7 +36,6 @@
                 }
             }
         </script>
-        </c:if>
         <p>
             <a href="<c:url value='?action=${actCal}&command=${commNew}' />">CAROLIE登録はこちら</a>
         </p>

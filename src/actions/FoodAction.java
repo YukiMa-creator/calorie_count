@@ -11,6 +11,7 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.CalorieService;
 import services.FoodService;
 
 /**
@@ -20,6 +21,7 @@ import services.FoodService;
 public class FoodAction extends ActionBase {
 
     private FoodService service;
+    private CalorieService cservice;
 
     /**
      * メソッドを実行する
@@ -28,11 +30,13 @@ public class FoodAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         service = new FoodService();
+        cservice = new CalorieService();
 
         //メソッドを実行
         invoke();
 
         service.close();
+        cservice.close();
     }
 
     /**
