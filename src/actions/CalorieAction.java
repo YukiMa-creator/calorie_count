@@ -147,6 +147,8 @@ public class CalorieAction extends ActionBase {
      */
     public void destroy() throws ServletException, IOException {
 
+        //CSRF対策 tokenチェック
+        if (checkToken()) {
             //idを条件にCalorieデータを取得する
             CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
 
@@ -157,3 +159,4 @@ public class CalorieAction extends ActionBase {
             redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
     }
+}
