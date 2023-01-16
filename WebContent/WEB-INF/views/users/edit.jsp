@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="constants.ForwardConst"%>
+<%@ page import="constants.AttributeConst"%>
 
 <c:set var="action" value="${ForwardConst.ACT_USE.getValue()}" />
 <c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />

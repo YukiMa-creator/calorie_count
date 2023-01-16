@@ -63,7 +63,10 @@ public class LoginFilter implements Filter {
 
                 if (!(ForwardConst.ACT_AUTH.getValue().equals(action)
                         && (ForwardConst.CMD_SHOW_LOGIN.getValue().equals(command)
-                                || ForwardConst.CMD_LOGIN.getValue().equals(command)))) {
+                                || ForwardConst.CMD_LOGIN.getValue().equals(command)))
+                        && !(ForwardConst.ACT_USE.getValue().equals(action)
+                                && (ForwardConst.CMD_NEW.getValue().equals(command)
+                                        || ForwardConst.CMD_CREATE.getValue().equals(command)))) {
 
                     //ログインページの表示またはログイン実行以外はログインページにリダイレクト
                     ((HttpServletResponse) response).sendRedirect(

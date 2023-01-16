@@ -89,7 +89,6 @@ public class CalorieAction extends ActionBase {
                     day,
                     uv, //ログインしている会員を、カロリー作成者として登録する
                     fv, //FOODを登録する
-                    null,
                     null);
 
             //カロリー情報登録
@@ -141,31 +140,24 @@ public class CalorieAction extends ActionBase {
     }
 
     /**
-     * 編集画面を表示する
+     * データを削除する
      * @throws ServletException
      * @throws IOException
      */
     public void edit() throws ServletException, IOException {
+        //CSRF対策 tokenチェック
+        if (checkToken()) {
 
-        //idを条件にカロリーデータを取得する
-        CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
+            //idを条件にCalorieデータを取得する
+            CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
 
-        //セッションからログイン中の会員情報を取得
-        UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
+            service.destroy(cv);
 
-        if (cv == null || uv.getId() != cv.getUser().getId()) {
-            //該当のカロリーデータが存在しない、または
-            //ログインしている会員がカロリーの作成者でない場合はエラー画面を表示
-            forward(ForwardConst.FW_ERR_UNKNOWN);
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
-        } else {
-
-            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-            putRequestScope(AttributeConst.CALORIE, cv); //取得したカロリーデータ
-
-            //編集画面を表示
-            forward(ForwardConst.FW_CAL_EDIT);
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
-
     }
+
 }

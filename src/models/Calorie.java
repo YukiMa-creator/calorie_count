@@ -76,9 +76,4 @@ public class Calorie {
     @Column(name = JpaConst.CAL_COL_CREATE_AT, nullable = false)
     private LocalDateTime createdAt;
 
-    /**
-     * 更新日時
-     */
-    @Column(name = JpaConst.CAL_COL_UPDATE_AT, nullable = false)
-    private LocalDateTime updatedAt;
 }

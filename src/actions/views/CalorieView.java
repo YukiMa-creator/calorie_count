@@ -44,9 +44,4 @@ public class CalorieView {
      */
     private LocalDateTime createdAt;
 
-    /**
-     * 更新日時
-     */
-    private LocalDateTime updatedAt;
-
 }

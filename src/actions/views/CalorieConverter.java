@@ -24,8 +24,7 @@ public class CalorieConverter {
                 cv.getCalorieDate(),
                 UserConverter.toModel(cv.getUser()),
                 FoodConverter.toModel(cv.getFood()),
-                cv.getCreatedAt(),
-                cv.getUpdatedAt());
+                cv.getCreatedAt());
     }
 
     /**
@@ -44,8 +43,7 @@ public class CalorieConverter {
                 c.getCalorieDate(),
                 UserConverter.toView(c.getUser()),
                 FoodConverter.toView(c.getFood()),
-                c.getCreatedAt(),
-                c.getUpdatedAt());
+                c.getCreatedAt());
     }
 
     /**
@@ -73,6 +71,5 @@ public class CalorieConverter {
         c.setUser(UserConverter.toModel(cv.getUser()));
         c.setFood(FoodConverter.toModel(cv.getFood()));
         c.setCreatedAt(cv.getCreatedAt());
-        c.setUpdatedAt(cv.getUpdatedAt());
     }
 }

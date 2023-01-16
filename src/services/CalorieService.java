@@ -66,7 +66,6 @@ public class CalorieService extends ServiceBase {
         if (errors.size() == 0) {
             LocalDateTime ldt = LocalDateTime.now();
             cv.setCreatedAt(ldt);
-            cv.setUpdatedAt(ldt);
             createInternal(cv);
         }
 
@@ -74,28 +73,6 @@ public class CalorieService extends ServiceBase {
         return errors;
     }
 
-    /**
-     * 画面から入力されたカロリーの登録内容を元に、カロリーデータを更新する
-     * @param cv カロリーの更新内容
-     * @return バリデーションで発生したエラーのリスト
-     */
-    public List<String> update(CalorieView cv) {
-
-        //バリデーションを行う
-        List<String> errors = CalorieValidator.validate(cv);
-
-        if (errors.size() == 0) {
-
-            //更新日時を現在時刻に設定
-            LocalDateTime ldt = LocalDateTime.now();
-            cv.setUpdatedAt(ldt);
-
-            updateInternal(cv);
-        }
-
-        //バリデーションで発生したエラーを返却（エラーがなければ0件の空リスト）
-        return errors;
-    }
 
     /**
      * idを条件にデータを1件取得する
@@ -118,18 +95,6 @@ public class CalorieService extends ServiceBase {
 
     }
 
-    /**
-     * カロリーデータを更新する
-     * @param cv カロリーデータ
-     */
-    private void updateInternal(CalorieView cv) {
-
-        em.getTransaction().begin();
-        Calorie c = findOneInternal(cv.getId());
-        CalorieConverter.copyViewToModel(c, cv);
-        em.getTransaction().commit();
-
-    }
 
     /**
      * idを条件にcalorieデータを削除する

@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst"%>
+<%@ page import="constants.AttributeConst"%>
+
 
 <c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
-<c:set var="actCal" value="${ForwardConst.ACT_CAL.getValue()}" />
+<c:set var="action" value="${ForwardConst.ACT_CAL.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
-<c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
+<c:set var="commDel" value="${ForwardConst.CMD_DESTROY.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -33,7 +35,7 @@
                 </tr>
                 <tr>
                     <th>カロリー</th>
-                    <td><c:out value="${calorie.food.kcal}" /></td>
+                    <td><c:out value="${calorie.food.kcal}" /> kcal</td>
                 </tr>
                 <tr>
                     <th>登録日時</th>
@@ -42,26 +44,17 @@
                     <td><fmt:formatDate value="${createDay}"
                             pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 </tr>
-                <tr>
-                    <th>更新日時</th>
-                    <fmt:parseDate value="${calorie.updatedAt}"
-                        pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
-                    <td><fmt:formatDate value="${updateDay}"
-                            pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                </tr>
             </tbody>
         </table>
 
-        <c:if test="${sessionScope.login_user.id == calorie.user.id}">
-            <p>
-                <a
-                    href="<c:url value='?action=${actCal}&command=${commEdt}&id=${calorie.id}' />">日付を変更する</a>
-            </p>
-        </c:if>
+        <p>
+            <a href="#" onclick="confirmDestroy();">この記録を削除する</a>
+        </p>
         <form method="POST"
             action="<c:url value='?action=${action}&command=${commDel}' />">
-            <input type="hidden" name="${AttributeConst.CAL_ID.getValue()}"
-                value="${calorie.id}" /> <input type="hidden"
+        <input type="hidden" name="${AttributeConst.CAL_ID.getValue()}"
+                value="${calorie.id}" />
+        <input type="hidden"
                 name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
         </form>
         <script>
@@ -71,8 +64,8 @@
                 }
             }
         </script>
-        <p>
-            <a href="<c:url value='?action=${actTop}&command=${commIdx}' />">一覧に戻る</a>
+
+        <p><a href="<c:url value='?action=${actTop}&command=${commIdx}' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>
