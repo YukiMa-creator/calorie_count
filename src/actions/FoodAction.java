@@ -49,15 +49,15 @@ public class FoodAction extends ActionBase {
         //セッションからログイン中の会員情報を取得
         UserView loginUser = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
-        //ログイン中の会員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
+        //ログイン中の会員が作成したFOODデータを、指定されたページ数の一覧画面に表示する分取得する
         int page = getPage();
         List<FoodView> foods = service.getMinePerPage(loginUser, page);
 
-        //ログイン中の従業員が作成した日報データの件数を取得
+        //ログイン中の従業員が作成したFOODデータの件数を取得
         long myFoodsCount = service.countAllMine(loginUser);
 
-        putRequestScope(AttributeConst.FOODS, foods); //取得した日報データ
-        putRequestScope(AttributeConst.FOD_COUNT, myFoodsCount); //ログイン中の従業員が作成した日報の数
+        putRequestScope(AttributeConst.FOODS, foods); //取得したFOODデータ
+        putRequestScope(AttributeConst.FOD_COUNT, myFoodsCount); //ログイン中の会員が作成したFOODの数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
@@ -97,7 +97,7 @@ public class FoodAction extends ActionBase {
         //CSRF対策用トークン
         if (checkToken()) {
 
-            //セッションからログイン中の従業員情報を取得
+            //セッションからログイン中の会員情報を取得
             UserView uv = (UserView) getSessionScope(AttributeConst.LOGIN_USE);
 
             //パラメータの値を元にFOOD情報のインスタンスを作成する
@@ -211,21 +211,21 @@ public class FoodAction extends ActionBase {
     /**
      *削除する
      */
-    public void destroy() throws ServletException, IOException {
+//    public void destroy() throws ServletException, IOException {
         //CSRF対策 tokenチェック
-        if (checkToken()) {
+  //      if (checkToken()) {
 
             //idを条件にFOODデータを取得する
-            FoodView fv = service.findOne(toNumber(getRequestParam(AttributeConst.FOD_ID)));
+    //        FoodView fv = service.findOne(toNumber(getRequestParam(AttributeConst.FOD_ID)));
 
-            service.destroy(fv);
+      //      service.destroy(fv);
 
-            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
-            removeSessionScope(AttributeConst.FOOD);
+        //    putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+          //  removeSessionScope(AttributeConst.FOOD);
 
             //一覧画面にリダイレクト
-            redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);
-        }
-    }
+            //redirect(ForwardConst.ACT_FOD, ForwardConst.CMD_INDEX);
+        //}
+    //}
 
 }

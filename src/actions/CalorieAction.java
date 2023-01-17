@@ -50,9 +50,9 @@ public class CalorieAction extends ActionBase {
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
 
         //カロリー情報の空インスタンスに、カロリーの日付＝今日の日付を設定する
-        CalorieView uv = new CalorieView();
-        uv.setCalorieDate(LocalDateTime.now());
-        putRequestScope(AttributeConst.CALORIE, uv); //日付のみ設定済みのカロリーインスタンス
+        CalorieView cv = new CalorieView();
+        cv.setCalorieDate(LocalDateTime.now());
+        putRequestScope(AttributeConst.CALORIE, cv); //日付のみ設定済みのカロリーインスタンス
 
         //新規登録画面を表示
         forward(ForwardConst.FW_CAL_NEW);
@@ -88,8 +88,7 @@ public class CalorieAction extends ActionBase {
                     null,
                     day,
                     uv, //ログインしている会員を、カロリー作成者として登録する
-                    fv, //FOODを登録する
-                    null);
+                    fv);
 
             //カロリー情報登録
             List<String> errors = service.create(cv);
@@ -147,16 +146,14 @@ public class CalorieAction extends ActionBase {
      */
     public void destroy() throws ServletException, IOException {
 
-        //CSRF対策 tokenチェック
-        if (checkToken()) {
-            //idを条件にCalorieデータを取得する
+            //idを条件にCALORIEデータを取得する
             CalorieView cv = service.findOne(toNumber(getRequestParam(AttributeConst.CAL_ID)));
 
             service.destroy(cv);
 
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
             //一覧画面にリダイレクト
             redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
         }
     }
-}

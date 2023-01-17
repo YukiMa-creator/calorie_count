@@ -1,6 +1,5 @@
 package services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import actions.views.CalorieConverter;
@@ -64,8 +63,6 @@ public class CalorieService extends ServiceBase {
     public List<String> create(CalorieView cv) {
         List<String> errors = CalorieValidator.validate(cv);
         if (errors.size() == 0) {
-            LocalDateTime ldt = LocalDateTime.now();
-            cv.setCreatedAt(ldt);
             createInternal(cv);
         }
 
@@ -97,7 +94,7 @@ public class CalorieService extends ServiceBase {
 
 
     /**
-     * idを条件にcalorieデータを削除する
+     * idを条件にCalorieデータを削除する
      * @param id
      */
     public CalorieView destroy(CalorieView cv) {
@@ -110,5 +107,4 @@ public class CalorieService extends ServiceBase {
         return cv;
 
     }
-
 }

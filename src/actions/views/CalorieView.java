@@ -39,9 +39,4 @@ public class CalorieView {
      */
     private FoodView food;
 
-    /**
-     *登録日時
-     */
-    private LocalDateTime createdAt;
-
 }

@@ -70,10 +70,4 @@ public class Calorie {
     @JoinColumn(name = JpaConst.CAL_COL_FOD, nullable = false)
     private Food food;
 
-    /**
-     * 登録日時
-     */
-    @Column(name = JpaConst.CAL_COL_CREATE_AT, nullable = false)
-    private LocalDateTime createdAt;
-
 }

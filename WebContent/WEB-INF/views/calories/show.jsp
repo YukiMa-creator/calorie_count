@@ -37,35 +37,27 @@
                     <th>カロリー</th>
                     <td><c:out value="${calorie.food.kcal}" /> kcal</td>
                 </tr>
-                <tr>
-                    <th>登録日時</th>
-                    <fmt:parseDate value="${calorie.createdAt}"
-                        pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date" />
-                    <td><fmt:formatDate value="${createDay}"
-                            pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                </tr>
             </tbody>
         </table>
 
         <p>
             <a href="#" onclick="confirmDestroy();">この記録を削除する</a>
         </p>
-        <form method="POST"
-            action="<c:url value='?action=${action}&command=${commDel}' />">
-        <input type="hidden" name="${AttributeConst.CAL_ID.getValue()}"
-                value="${calorie.id}" />
-        <input type="hidden"
-                name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
+        <form method="POST" action="<c:url value='?action=${action}&command=${commDel}' />">
+            <input type="hidden" name="${AttributeConst.CAL_ID.getValue()}" value="${calorie.id}" />
+            <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
         </form>
+
         <script>
             function confirmDestroy() {
                 if (confirm("本当に削除してよろしいですか？")) {
-                    document.forms[1].submit();
+                    document.forms[0].submit();
                 }
             }
         </script>
 
-        <p><a href="<c:url value='?action=${actTop}&command=${commIdx}' />">一覧に戻る</a>
+        <p>
+            <a href="<c:url value='?action=${actTop}&command=${commIdx}' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>
