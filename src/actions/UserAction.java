@@ -128,7 +128,7 @@ public class UserAction extends ActionBase {
         //idを条件にユーザーデータを取得する
         UserView uv = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
 
-        if (uv == null) {
+        if (uv == null || uv.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
             //データが取得できなかった場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
