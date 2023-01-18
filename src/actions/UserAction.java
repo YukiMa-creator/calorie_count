@@ -69,7 +69,8 @@ public class UserAction extends ActionBase {
                     getRequestParam(AttributeConst.USE_MAIL),
                     getRequestParam(AttributeConst.USE_PASS),
                     null,
-                    null);
+                    null,
+                    AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
 
             //アプリケーションスコープからpepper文字列を取得
             String pepper = getContextScope(PropertyConst.PEPPER);
@@ -109,7 +110,7 @@ public class UserAction extends ActionBase {
         //idを条件に従業員データを取得する
         UserView uv = service.findOne(toNumber(getRequestParam(AttributeConst.USE_ID)));
 
-        if (uv == null) {
+        if (uv == null || uv.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
 
             //データが取得できなかった場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
@@ -159,7 +160,8 @@ public class UserAction extends ActionBase {
                     getRequestParam(AttributeConst.USE_MAIL),
                     getRequestParam(AttributeConst.USE_PASS),
                     null,
-                    null);
+                    null,
+                    AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
 
             //アプリケーションスコープからpepper文字列を取得
             String pepper = getContextScope(PropertyConst.PEPPER);
@@ -191,21 +193,23 @@ public class UserAction extends ActionBase {
     }
 
     /**
-     *削除する
+     * 論理削除を行う
+     * @throws ServletException
+     * @throws IOException
      */
     public void destroy() throws ServletException, IOException {
 
-        UserView uv = getSessionScope(AttributeConst.LOGIN_USE);
-        service.destroy(uv);
+        //CSRF対策 tokenのチェック
+        if (checkToken()) {
 
-        putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+            //idを条件に従業員データを論理削除する
+            service.destroy(toNumber(getRequestParam(AttributeConst.USE_ID)));
 
-        removeSessionScope(AttributeConst.LOGIN_USE);
+            //セッションに削除完了のフラッシュメッセージを設定
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
-        //一覧画面にリダイレクト
-        redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
-
-
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
+        }
     }
-
 }

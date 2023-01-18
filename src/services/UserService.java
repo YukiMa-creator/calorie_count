@@ -121,17 +121,23 @@ public class UserService extends ServiceBase {
     }
 
     /**
-     * idを条件に従業員データを削除する
+     * idを条件に会員データを論理削除する
      * @param id
      */
-    public UserView destroy(UserView uv) {
+    public void destroy(Integer id) {
 
-        em.getTransaction().begin();
-      //idを条件に登録済みの従業員情報を取得する
-        User u = findOneInternal(uv.getId());
-        em.remove(u); //データ削除
-        em.getTransaction().commit();
-        return uv;
+        //idを条件に登録済みの従業員情報を取得する
+        UserView savedEmp = findOne(id);
+
+        //更新日時に現在時刻を設定する
+        LocalDateTime today = LocalDateTime.now();
+        savedEmp.setUpdatedAt(today);
+
+        //論理削除フラグをたてる
+        savedEmp.setDeleteFlag(JpaConst.USE_DEL_TRUE);
+
+        //更新処理を行う
+        update(savedEmp);
 
     }
 

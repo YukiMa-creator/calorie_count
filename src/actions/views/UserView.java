@@ -52,4 +52,9 @@ public class UserView {
      */
     private LocalDateTime updatedAt;
 
+    /**
+     * 削除された従業員かどうか（現役：0、削除済み：1）
+     */
+    private Integer deleteFlag;
+
 }

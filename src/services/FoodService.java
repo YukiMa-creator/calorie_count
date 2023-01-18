@@ -103,6 +103,7 @@ public class FoodService extends ServiceBase {
 
         savedFood.setName(fv.getName()); //変更後の食べ物を設定する
         savedFood.setAmount(fv.getAmount()); //変更後の量を設定する
+        savedFood.setKcal(fv.getKcal()); //変更後のカロリーを設定する
 
         //更新日時に現在時刻を設定する
         LocalDateTime today = LocalDateTime.now();

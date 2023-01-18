@@ -19,7 +19,10 @@ public interface JpaConst {
     String USE_COL_PASS = "password"; //パスワード
     String USE_COL_CREATE_AT = "created_at"; //登録日時
     String USE_COL_UPDATE_AT = "updated_at"; //更新日時
+    String USE_COL_DELETE_FLAG = "delete_flag"; //削除フラグ
 
+    int USE_DEL_TRUE = 1; //削除フラグON(削除済み)
+    int USE_DEL_FALSE = 0; //削除フラグOFF(現役)
     //フードテーブル
     String TABLE_FOD = "foods"; //テーブル名
     //フードテーブルカラム

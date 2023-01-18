@@ -31,6 +31,10 @@ public enum AttributeConst {
     USE_PASS("password"),
     USE_ID("id"),
 
+    //削除フラグ
+    DEL_FLAG_TRUE(1),
+    DEL_FLAG_FALSE(0),
+
   //フード管理
     FOOD("food"),
     FOD_CODE("code"),
